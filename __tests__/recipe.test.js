@@ -6,7 +6,7 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 const Recipe = require('../lib/models/Recipe');
 
-describe('app routes', () => {
+describe('recipe routes', () => {
   beforeAll(() => {
     connect();
   });
@@ -32,6 +32,7 @@ describe('app routes', () => {
         ]
       })
       .then(res => {
+        console.log(res.text);
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'cookies',
