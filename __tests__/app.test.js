@@ -65,6 +65,33 @@ describe('app routes', () => {
       });
   });
 
+  it('gets a recipe by id', async() => {
+    const recipe = await Recipe.create(
+      { name: 'cookies', directions: ['preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'] },
+    );
+
+    return request(app)
+      .get(`/api/v1/recipes/${recipe._id}`)
+      .then(res => {
+        console.log(res, 'XXXXXXXXXXXXXXXXXX');
+        console.log(res.body);
+        expect(res.body).toEqual({
+          name: 'cookies',
+          directions: [
+            'preheat oven to 375',
+            'mix ingredients',
+            'put dough on cookie sheet',
+            'bake for 10 minutes'
+          ],
+          _id: recipe._id.toString(),
+          __v: 0
+        });
+      });
+  });
+
   it('updates a recipe by id', async() => {
     const recipe = await Recipe.create({
       name: 'cookies',
