@@ -29,10 +29,10 @@ describe('recipe routes', () => {
           'mix ingredients',
           'put dough on cookie sheet',
           'bake for 10 minutes'
-        ]
+        ],
+        ingredients: [{ name: 'flour', amount: 2, unit: 'cup' }]
       })
       .then(res => {
-        console.log(res.text);
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'cookies',
@@ -42,6 +42,7 @@ describe('recipe routes', () => {
             'put dough on cookie sheet',
             'bake for 10 minutes'
           ],
+          ingredients: [{ _id: expect.any(String), name: 'flour', amount: 2, unit: 'cup' }],
           __v: 0
         });
       });
@@ -49,9 +50,9 @@ describe('recipe routes', () => {
 
   it('gets all recipes', async() => {
     const recipes = await Recipe.create([
-      { name: 'cookies', directions: [] },
-      { name: 'cake', directions: [] },
-      { name: 'pie', directions: [] }
+      { name: 'cookies', directions: [], ingredients: [] },
+      { name: 'cake', directions: [], ingredients: [] },
+      { name: 'pie', directions: [], ingredients: [] }
     ]);
 
     return request(app)
@@ -71,7 +72,7 @@ describe('recipe routes', () => {
       { name: 'cookies', directions: ['preheat oven to 375',
         'mix ingredients',
         'put dough on cookie sheet',
-        'bake for 10 minutes'] },
+        'bake for 10 minutes'], ingredients: [{ name: 'flour', amount: 2, unit: 'cup' }] },
     );
 
     return request(app)
@@ -85,6 +86,7 @@ describe('recipe routes', () => {
             'put dough on cookie sheet',
             'bake for 10 minutes'
           ],
+          ingredients: [{ _id: expect.any(String), name: 'flour', amount: 2, unit: 'cup' }],
           _id: recipe._id.toString(),
           __v: 0
         });
@@ -100,6 +102,7 @@ describe('recipe routes', () => {
         'put dough on cookie sheet',
         'bake for 10 minutes'
       ],
+      ingredients: [{ name: 'flour', amount: 2, unit: 'cup' }]
     });
 
     return request(app)
@@ -115,6 +118,7 @@ describe('recipe routes', () => {
             'put dough on cookie sheet',
             'bake for 10 minutes'
           ],
+          ingredients: [{ _id: expect.any(String), name: 'flour', amount: 2, unit: 'cup' }],
           __v: 0
         });
       });
@@ -125,7 +129,7 @@ describe('recipe routes', () => {
       { name: 'cookies', directions: ['preheat oven to 375',
         'mix ingredients',
         'put dough on cookie sheet',
-        'bake for 10 minutes'] },
+        'bake for 10 minutes'], ingredients: [{ name: 'flour', amount: 2, unit: 'cup' }] }
     );
 
     return request(app)
@@ -139,6 +143,7 @@ describe('recipe routes', () => {
             'put dough on cookie sheet',
             'bake for 10 minutes'
           ],
+          ingredients: [{ _id: expect.any(String), name: 'flour', amount: 2, unit: 'cup' }],
           _id: recipe._id.toString(),
           __v: 0
         });
